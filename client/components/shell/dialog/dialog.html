@@ -3,13 +3,29 @@
     <h2 class="md-title">
       Set a description for the new thing
     </h2>
-    <form name="projectForm">
+    <form name="bookForm">
       <md-input-container>
-        <label>Description</label>
-        <input md-maxlength="30" required name="description" ng-model="newThing">
-        <div ng-messages="projectForm.description.$error">
+        <label>Title</label>
+        <input md-maxlength="128" required name="title" ng-model="title">
+        <div ng-messages="bookForm.title.$error">
           <div ng-message="required">This is required.</div>
-          <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+          <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Author</label>
+        <input md-maxlength="128" required name="author" ng-model="author">
+        <div ng-messages="bookForm.author.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Cover Url</label>
+        <input type="url" required name="coverUrl" ng-model="coverUrl">
+        <div ng-messages="bookForm.coverUrl.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="url">This should be a URL</div>
         </div>
       </md-input-container>
     </form>
@@ -18,7 +34,7 @@
     <md-button ng-click="closeDialog()" class="md-primary">
       Cancel
     </md-button>
-    <md-button ng-click="addThing()" class="md-primary">
+    <md-button ng-click="addBook()" class="md-primary">
       Save
     </md-button>
   </div>
