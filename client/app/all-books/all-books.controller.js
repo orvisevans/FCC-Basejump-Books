@@ -12,6 +12,12 @@ angular.module('documentsApp')
     $scope.getColor = tile.getColor;
     $scope.getSpan = tile.getSpan;
 
+    var originatorEv;
+    $scope.openMenu = function($mdOpenMenu, ev) {
+      originatorEv = ev;
+      $mdOpenMenu(ev);
+    };
+
     $scope.borrowBook = function(book) {
       //TODO: Implement
     };
