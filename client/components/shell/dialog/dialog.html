@@ -6,7 +6,7 @@
     <form name="bookForm">
       <md-input-container>
         <label>Title</label>
-        <input md-maxlength="128" required name="title" ng-model="title">
+        <input md-maxlength="128" required name="name" ng-model="name">
         <div ng-messages="bookForm.title.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">The name has to be less than 128 characters long.</div>
