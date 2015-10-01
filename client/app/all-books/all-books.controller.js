@@ -2,6 +2,7 @@
 
 angular.module('documentsApp')
   .controller('AllBooksCtrl', function ($scope, $http, socket, tile) {
+    $scope.pageTitle = "Community Books"
     $scope.allBooks = [];
 
     $http.get('/api/books').success(function(allBooks) {

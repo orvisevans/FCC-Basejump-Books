@@ -2,6 +2,7 @@
 
 angular.module('documentsApp')
   .controller('LoginCtrl', function ($scope, Auth, $location) {
+    $scope.pageTitle = "Login";
     $scope.user = {};
     $scope.errors = {};
 

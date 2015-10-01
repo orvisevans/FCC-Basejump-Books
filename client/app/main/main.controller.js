@@ -2,6 +2,7 @@
 
 angular.module('documentsApp')
   .controller('MainCtrl', function ($scope, $http, socket, tile) {
+    $scope.pageTitle = "Things"
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {

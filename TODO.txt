@@ -13,9 +13,6 @@ borrowing requests view:
   nice "You're done!" image when clear like inbox
 
 Shell:
-  Title as a $scope variable
-  add shell to login/logout pages, profile, etc.
-  Set titles in the various pages that use the shell
   Sidebar:
     add link to all-books view
     add link to pending requests view (with count)
