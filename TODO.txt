@@ -1,5 +1,4 @@
 Add-Book Dialog:
-  Change directions on dialog to be "books" rather than "things"
 
 Borrowing API:
   initiate with book, borrower, owner, dateRequested, dateApproved, approved
