@@ -1,4 +1,5 @@
 Add-Book Dialog:
+  Search Amazon for cover URLs after putting in Title / Author
 
 Borrowing API:
   initiate with book, borrower, owner, dateRequested, dateApproved, approved
