@@ -6,9 +6,9 @@ angular.module('documentsApp')
 
     $scope.menu = [
       {title: 'All Books', url: '/all-books', icon: '', count: ''},
-      {title: 'Pending Requests', url: '/pending-requests', icon: '', count: ''},
-      {title: 'Borrowing Books', url: '/borrowing-books', icon: '', count: ''},
-      {title: 'Borrowed Books', url: '/borrowed-books', icon: '', count: ''}
+      {title: 'Pending Requests', url: '/pending-requests', icon: '', count: '', loginRequired: true},
+      {title: 'Borrowing Books', url: '/borrowing-books', icon: '', count: '', loginRequired: true},
+      {title: 'Borrowed Books', url: '/borrowed-books', icon: '', count: '', loginRequired: true}
     ];
 
     $scope.isLoggedIn = Auth.isLoggedIn;

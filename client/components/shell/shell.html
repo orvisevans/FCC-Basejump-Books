@@ -12,7 +12,7 @@
 
     </md-toolbar>
 
-      <md-item ng-repeat="item in menu">
+      <md-item ng-repeat="item in menu" ng-hide="item.loginRequired && !isLoggedIn()">
         <a ng-href="{{item.url}}">
           <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset"><ng-md-icon icon="{{item.icon}}"></ng-md-icon></div>
@@ -22,7 +22,7 @@
         </a>
       </md-item>
       <md-divider></md-divider>
-      <md-item>
+      <md-item ng-if="isLoggedIn()">
         <a href="/user/me">
           <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
@@ -32,6 +32,24 @@
             </div>
           </md-item-content>
         </a>
+      </md-item>
+      <md-item ng-hide="isLoggedIn()" ui-sref="login">
+        <md-button>
+          <md-icon md-svg-icon="action:input"></md-icon>
+          Login
+        </md-button>
+      </md-item>
+      <md-item ng-hide="isLoggedIn()" ui-sref="signup">
+        <md-button>
+          <md-icon md-svg-icon="action:launch"></md-icon>
+          Signup
+        </md-button>
+      </md-item>
+      <md-item ng-show="isLoggedIn()">
+        <md-button ng-click="logout()">
+          <md-icon md-svg-icon="action:exit_to_app"></md-icon>
+          Logout
+        </md-button>
       </md-item>
 
     </md-content>
