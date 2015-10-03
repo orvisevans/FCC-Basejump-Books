@@ -28,3 +28,6 @@ User API:
   Add city, auto-add active, auto-add date-joined
   update test user and admin
   Twitter Auth
+
+All:
+  Make it pretty
