@@ -1,8 +1,15 @@
 'use strict';
 
 angular.module('documentsApp')
-  .controller('ShellCtrl', function ($mdSidenav, $mdDialog, $scope, $location, Auth) {
+  .controller('ShellCtrl', function ($mdSidenav, $mdDialog, $mdMedia, $scope, $location, Auth) {
 
+
+    $scope.menu = [
+      {title: 'All Books', url: '/all-books', icon: '', count: ''},
+      {title: 'Pending Requests', url: '/pending-requests', icon: '', count: ''},
+      {title: 'Borrowing Books', url: '/borrowing-books', icon: '', count: ''},
+      {title: 'Borrowed Books', url: '/borrowed-books', icon: '', count: ''}
+    ];
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;

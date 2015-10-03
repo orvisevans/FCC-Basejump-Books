@@ -11,7 +11,28 @@
       </div>
 
     </md-toolbar>
-    <md-content layout-padding>
+
+      <md-item ng-repeat="item in menu">
+        <a ng-href="{{item.url}}">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset"><ng-md-icon icon="{{item.icon}}"></ng-md-icon></div>
+            <div class="inset">{{item.title}}</div>
+            <div class="inset count">{{item.count}}</div>
+          </md-item-content>
+        </a>
+      </md-item>
+      <md-divider></md-divider>
+      <md-item>
+        <a href="/user/me">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <ng-md-icon icon="settings"></ng-md-icon>
+            </div>
+            <div class="inset">Profile
+            </div>
+          </md-item-content>
+        </a>
+      </md-item>
 
     </md-content>
   </md-sidenav>
