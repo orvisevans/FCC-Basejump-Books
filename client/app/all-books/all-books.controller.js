@@ -24,6 +24,13 @@ angular.module('documentsApp')
         });
     };
 
+    $scope.denyRequest = function (book) {
+      $http.put('/api/books/denyRequest/' + book._id + '/' + book.requester)
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
     $scope.returnBook = function (book) {
       $http.put('/api/books/returnBook/' + book._id)
         .success(function(bookRes) {
