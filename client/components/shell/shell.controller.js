@@ -6,8 +6,8 @@ angular.module('documentsApp')
 
     $scope.menu = [
       {title: 'All Books', url: '/all-books', icon: '', count: ''},
+      {title: 'Your Books', url: '/your-books', icon: '', count: '', loginRequired: true},
       {title: 'Pending Requests', url: '/pending-requests', icon: '', count: '', loginRequired: true},
-      {title: 'Borrowing Books', url: '/borrowing-books', icon: '', count: '', loginRequired: true},
       {title: 'Borrowed Books', url: '/borrowed-books', icon: '', count: '', loginRequired: true}
     ];
 
