@@ -1,9 +1,16 @@
 'use strict';
 
 angular.module('documentsApp')
-  .controller('AllBooksCtrl', function ($scope, $http, socket, tile) {
+  .controller('AllBooksCtrl', function ($scope, $http, socket, tile, Auth) {
     $scope.pageTitle = "Community Books"
     $scope.allBooks = [];
+    $scope.isLoggedIn = Auth.isLoggedIn;
+
+    Auth.isLoggedInAsync(function (loggedIn) {
+      if (loggedIn) {
+        $scope.user = Auth.getCurrentUser();
+      }
+    });
 
     $http.get('/api/books').success(function(allBooks) {
       $scope.allBooks = allBooks;
@@ -36,6 +43,14 @@ angular.module('documentsApp')
         .success(function(bookRes) {
           book = bookRes;
         });
+    };
+
+    $scope.isMyBook = function (book) {
+      return book.owner === $scope.user._id;
+    };
+
+    $scope.imBorrowing = function (book) {
+      return book.borrower === $scope.user._id;
     };
 
     $scope.getColor = tile.getColor;

@@ -10,9 +10,6 @@ Borrowing API:
 
 all-books view:
   filter with material Chips and angular filters
-  able to approve loan Requests
-  able to return books borrowed
-  able to request books
 
 your-books view:
   highlight books currently borrowed
