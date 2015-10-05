@@ -10,6 +10,27 @@ angular.module('documentsApp')
       socket.syncUpdates('book', $scope.allBooks);
     });
 
+    $scope.requestBook = function (book) {
+      $http.put('/api/request/' + book._id + '/' + $scope.user._id)
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
+    $scope.approveRequest = function (book) {
+      $http.put('/api/approveRequest/' + book._id + '/' + book.requester)
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
+    $scope.returnBook = function (book) {
+      $http.put('/api/returnBook/' + book._id)
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
     $scope.getColor = tile.getColor;
     $scope.getSpan = tile.getSpan;
 
