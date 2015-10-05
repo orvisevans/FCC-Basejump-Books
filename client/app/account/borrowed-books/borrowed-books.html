@@ -4,26 +4,14 @@
 <md-grid-list class="things-list" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
         md-row-height-gt-md="1:1" md-row-height="4:3"
         md-gutter="8px" md-gutter-gt-sm="4px">
-  <md-grid-tile ng-repeat="book in booksBorrowedFromUser" ng-class="getColor($index)" md-rowspan="{{getSpan($index)}}"
+  <md-grid-tile ng-repeat="book in booksBorrowedFromUser | orderBy: 'dueDate'"
+                  ng-class="getColor($index)"
+                  md-rowspan="{{getSpan($index)}}"
                   md-colspan="{{getSpan($index)}}"
                   md-colspan-sm="1">
 
-    <md-menu>
-      <md-button aria-label="Borrow item" class="md-icon-button delete-btn"  ng-click="openMenu($mdOpenMenu, $event)">
-          <md-icon style="fill:#fff" md-menu-origin md-svg-icon="assets/icons/dots-vertical.svg"></md-icon>
-      </md-button>
-
-      <md-menu-content width="4">
-        <md-menu-item ui-sref="borrow/{{book._id}}">
-          <md-button>
-            Borrow
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-
     <img class="book-cover" ng-src="{{book.coverUrl}}">
-    <md-grid-tile-footer><h3>{{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
+    <md-grid-tile-footer><h3>Due {{dueDate(book)}} - {{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
   </md-grid-tile>
 </md-grid-list>
 
@@ -31,25 +19,27 @@
 <md-grid-list class="things-list" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
         md-row-height-gt-md="1:1" md-row-height="4:3"
         md-gutter="8px" md-gutter-gt-sm="4px">
-  <md-grid-tile ng-repeat="book in booksUserIsBorrowing" ng-class="getColor($index)" md-rowspan="{{getSpan($index)}}"
+  <md-grid-tile ng-repeat="book in booksUserIsBorrowing | orderBy: 'dueDate'"
+                  ng-class="getColor($index)"
+                  md-rowspan="{{getSpan($index)}}"
                   md-colspan="{{getSpan($index)}}"
                   md-colspan-sm="1">
 
     <md-menu>
-      <md-button aria-label="Borrow item" class="md-icon-button delete-btn"  ng-click="openMenu($mdOpenMenu, $event)">
+      <md-button aria-label="Return the Book" class="md-icon-button delete-btn"  ng-click="openMenu($mdOpenMenu, $event)">
           <md-icon style="fill:#fff" md-menu-origin md-svg-icon="assets/icons/dots-vertical.svg"></md-icon>
       </md-button>
 
       <md-menu-content width="4">
-        <md-menu-item ui-sref="borrow/{{book._id}}">
+        <md-menu-item ng-click="returnBook(book)">
           <md-button>
-            Borrow
+            Return the Book
           </md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>
 
     <img class="book-cover" ng-src="{{book.coverUrl}}">
-    <md-grid-tile-footer><h3>{{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
+    <md-grid-tile-footer><h3>Due {{dueDate(book)}} - {{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
   </md-grid-tile>
 </md-grid-list>

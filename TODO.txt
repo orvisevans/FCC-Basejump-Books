@@ -15,8 +15,6 @@ your-books view:
   highlight books currently borrowed
 
 borrowed-books view:
-  see all books borrowed by and from you
-  able to return books
 
 borrowing requests view:
   Approval/Denial capabilities (check/X dots on each book)

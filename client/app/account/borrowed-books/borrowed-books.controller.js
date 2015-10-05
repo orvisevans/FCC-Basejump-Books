@@ -22,13 +22,24 @@ angular.module('documentsApp')
 
     Auth.isLoggedInAsync(function (loggedIn) {
       if (loggedIn) {
-        var user = Auth.getCurrentUser();
-        getBooksBorrowedBy(user);
-        getBooksBorrowedFrom(user);
+        $scope.user = Auth.getCurrentUser();
+        getBooksBorrowedBy($scope.user);
+        getBooksBorrowedFrom($scope.user);
       } else {
         $location.path('/login');
       }
     });
+
+    $scope.returnBook = function (book) {
+      $http.put('/api/returnBook/' + book._id)
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
+    $scope.dueDate = function (book) {
+      return book.dueDate.slice(0,15);
+    };
 
 
 
