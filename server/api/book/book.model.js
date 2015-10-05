@@ -8,7 +8,13 @@ var BookSchema = new Schema({
   author: {type: String, required: true},
   coverUrl: {type: String, required: true},
   owner: {type: String, required: true},
+  requested: {type: Boolean, default: false},
+  requester: String,
+  requestedDate: Date,
+  onLoan: {type: Boolean, default: false},
   borrower: String,
+  borrowedDate: Date,
+  dueDate: Date,
   dateAdded: {type: Date, default: Date.now},
   public: {type: Boolean, default: true},
   active: {type: Boolean, default: true}

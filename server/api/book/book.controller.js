@@ -56,12 +56,65 @@ exports.destroy = function(req, res) {
 
 //Finds books borrowed by a user in the DB.
 exports.findBorrowedBy = function(req, res) {
-
+  Book.find({onLoan: true, borrower: req.params.borrowerId}, function(err, books) {
+    if(err) { return handleError(res, err); }
+    if(!books) { return res.status(404).send('Not Found'); }
+    return res.json(books);
+  });
 };
 
 //Finds books borrowed from a user in the DB.
 exports.findBorrowedFrom = function(req, res) {
-  
+  Book.find({onLoan: true, owner: req.params.borrowerId}, function(err, books) {
+    if(err) { return handleError(res, err); }
+    if(!books) { return res.status(404).send('Not Found'); }
+    return res.json(books);
+  });
+};
+
+exports.requestBook = function(req, res) {
+  var conditions = {book: req.params.bookId};
+  var update = {requested: true,
+                requester: req.params.requesterId,
+                requestedDate: new Date()};
+
+  Book.findAndUpdate(conditions, update, function (err, book) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(book);
+  });
+};
+
+exports.approveRequest = function(req, res) {
+  var dueDate = new Date();
+  dueDate.setDate(dueDate.getDate() + 30);
+
+  var conditions = {book: req.params.bookId};
+  var update = {requested: false,
+                requester: undefined,
+                requestedDate: undefined,
+                onLoan: true,
+                borrower: req.params.borrowerId,
+                borrowedDate: new Date(),
+                dueDate: dueDate};
+
+  Book.findAndUpdate(conditions, update, function (err, book) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(book);
+  });
+};
+
+exports.returnBook = function(req, res) {
+  var conditions = {book: req.params.bookId};
+  var update = {onLoan: false,
+                borrower: undefined,
+                borrowedDate: undefined,
+                dueDate: undefined,
+                };
+
+  Book.findAndUpdate(conditions, update, function (err, book) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(book);
+  });
 };
 
 function handleError(res, err) {
