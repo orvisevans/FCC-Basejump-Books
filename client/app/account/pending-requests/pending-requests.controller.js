@@ -31,14 +31,14 @@ angular.module('documentsApp')
     });
 
     $scope.approveRequest = function (book) {
-      $http.put('/api/approveRequest/' + book._id + '/' + book.requester)
+      $http.put('/api/books/approveRequest/' + book._id + '/' + book.requester)
         .success(function(bookRes) {
           book = bookRes;
         });
     };
 
     $scope.denyRequest = function (book) {
-      $http.put('/api/denyRequest/' + book._id + '/' + book.requester)
+      $http.put('/api/books/denyRequest/' + book._id + '/' + book.requester)
         .success(function(bookRes) {
           book = bookRes;
         });

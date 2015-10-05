@@ -31,7 +31,7 @@ angular.module('documentsApp')
     });
 
     $scope.returnBook = function (book) {
-      $http.put('/api/returnBook/' + book._id)
+      $http.put('/api/books/returnBook/' + book._id)
         .success(function(bookRes) {
           book = bookRes;
         });
