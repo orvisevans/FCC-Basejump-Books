@@ -1,3 +1,7 @@
+Seed Data:
+  consistant user IDs for test users?
+  at least 10 books
+
 Add-Book Dialog:
   Search Amazon for cover URLs after putting in Title / Author
 
