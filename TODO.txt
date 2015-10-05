@@ -17,9 +17,6 @@ your-books view:
 borrowed-books view:
 
 borrowing requests view:
-  Approval/Denial capabilities (check/X dots on each book)
-  Clicking X closes the request
-  Clicking Check closes the request and sends it to the Borrowed Book Section of the users
   nice "You're done!" image when clear like inbox
 
 Shell:

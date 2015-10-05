@@ -72,6 +72,24 @@ exports.findBorrowedFrom = function(req, res) {
   });
 };
 
+//Finds books requested by a user in the DB.
+exports.findRequestedBy = function(req, res) {
+  Book.find({requested: true, requester: req.params.requesterId}, function(err, books) {
+    if(err) { return handleError(res, err); }
+    if(!books) { return res.status(404).send('Not Found'); }
+    return res.json(books);
+  });
+};
+
+//Finds books requested from a user in the DB.
+exports.findRequestedFrom = function(req, res) {
+  Book.find({requested: true, owner: req.params.ownerId}, function(err, books) {
+    if(err) { return handleError(res, err); }
+    if(!books) { return res.status(404).send('Not Found'); }
+    return res.json(books);
+  });
+};
+
 exports.requestBook = function(req, res) {
   var conditions = {book: req.params.bookId};
   var update = {requested: true,
@@ -96,6 +114,18 @@ exports.approveRequest = function(req, res) {
                 borrower: req.params.borrowerId,
                 borrowedDate: new Date(),
                 dueDate: dueDate};
+
+  Book.findAndUpdate(conditions, update, function (err, book) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(book);
+  });
+};
+
+exports.denyRequest = function(req, res) {
+  var conditions = {book: req.params.bookId};
+  var update = {requested: false,
+                requester: undefined,
+                requestedDate: undefined};
 
   Book.findAndUpdate(conditions, update, function (err, book) {
       if(err) { return handleError(res, err); }
