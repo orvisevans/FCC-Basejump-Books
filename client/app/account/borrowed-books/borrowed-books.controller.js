@@ -2,7 +2,7 @@
 
 angular.module('documentsApp')
   .controller('BorrowedBooksCtrl', function ($scope, $http, $location, socket, tile, Auth, User) {
-    $scope.pageTitle = "Community Books"
+    $scope.pageTitle = "Borrowed Books"
     $scope.booksBorrowedByUser = [];
     $scope.booksBorrowedFromUser = [];
 
