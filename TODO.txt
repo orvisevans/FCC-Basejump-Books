@@ -2,6 +2,7 @@ Add-Book Dialog:
   Search Amazon for cover URLs after putting in Title / Author
 
 Borrowing API:
+  add fields to Books API: loanRequester, dateRequested, onLoan, borrower, dateBorrowed, dateDueBack
 
 all-books view:
   filter with material Chips and angular filters

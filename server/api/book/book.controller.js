@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var Book = require('./book.model');
-var Borrow = require('../borrow/borrow.model');
 
 // Get list of books
 exports.index = function(req, res) {
@@ -55,43 +54,14 @@ exports.destroy = function(req, res) {
   });
 };
 
-//Generic function to return books borrowed by or from a user in the DB.
-function findBorrowed(req, res, byOrFrom) {
-  var findParam = {};
-  if (byOrFrom === 'by') {
-    findParam = {borrower: req.params.id};
-  } else if (byOrFrom === 'from') {
-    findParam = {owner: req.params.id};
-  } else {
-    throw 'byOrFrom must be "by" or "from".'
-  }
-  Borrow.find(findParam, function (err, borrows) {
-    if(err) { return handleError(res, err); }
-    if(borrows.length === 0) { return res.status(404).send('None'); }
-    var borrowedBooks = [];
-    borrows.forEach(function(borrow) {
-      Book.findById(borrow.book, function (err, book) {
-        if (err) {
-          console.log('book not found: ' + borrow.book +
-                      ' in borrow: ' + borrow.id);
-        }
-        if (book) {
-          borrowedBooks.push(book);
-        }
-      });
-    });
-    res.json(borrowedBooks);
-  });
-}
-
 //Finds books borrowed by a user in the DB.
 exports.findBorrowedBy = function(req, res) {
-  findBorrowed(req, res, 'by');
+
 };
 
 //Finds books borrowed from a user in the DB.
 exports.findBorrowedFrom = function(req, res) {
-  findBorrowed(req, res, 'from');
+  
 };
 
 function handleError(res, err) {
