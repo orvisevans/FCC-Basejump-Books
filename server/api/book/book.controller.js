@@ -54,6 +54,15 @@ exports.destroy = function(req, res) {
   });
 };
 
+//Finds books owned by a user in the DB.
+exports.findOwnedBy = function(req, res) {
+  Book.find({owner: req.params.ownerId}, function(err, books) {
+    if(err) { return handleError(res, err); }
+    if(!books) { return res.status(404).send('Not Found'); }
+    return res.json(books);
+  });
+};
+
 //Finds books borrowed by a user in the DB.
 exports.findBorrowedBy = function(req, res) {
   Book.find({onLoan: true, borrower: req.params.borrowerId}, function(err, books) {
