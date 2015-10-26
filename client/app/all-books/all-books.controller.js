@@ -2,7 +2,7 @@
 
 angular.module('documentsApp')
   .controller('AllBooksCtrl', function ($scope, $http, socket, tile, Auth) {
-    $scope.pageTitle = "Community Books"
+    $scope.pageTitle = 'Community Books';
     $scope.allBooks = [];
     $scope.isLoggedIn = Auth.isLoggedIn;
 
@@ -63,6 +63,7 @@ angular.module('documentsApp')
     };
 
     $scope.borrowBook = function(book) {
+      console.log('borrowing not implemented yet for: ' + book);
       //TODO: Implement
     };
 

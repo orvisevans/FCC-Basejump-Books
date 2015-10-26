@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('documentsApp')
-  .controller('BorrowedBooksCtrl', function ($scope, $http, $location, socket, tile, Auth, User) {
-    $scope.pageTitle = "Borrowed Books"
+  .controller('BorrowedBooksCtrl', function ($scope, $http, $location, socket, tile, Auth) {
+    $scope.pageTitle = 'Borrowed Books';
     $scope.booksBorrowedByUser = [];
     $scope.booksBorrowedFromUser = [];
 

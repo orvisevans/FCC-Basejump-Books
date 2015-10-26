@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('documentsApp')
-  .controller('PendingRequestsCtrl', function ($scope, $http, $location, socket, tile, Auth, User) {
-    $scope.pageTitle = "Pending Requests"
+  .controller('PendingRequestsCtrl', function ($scope, $http, $location, socket, tile, Auth) {
+    $scope.pageTitle = 'Pending Requests';
     $scope.booksRequestedByUser = [];
     $scope.booksRequestedFromUser = [];
 

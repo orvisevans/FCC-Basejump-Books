@@ -2,7 +2,7 @@
 
 angular.module('documentsApp')
   .controller('SignupCtrl', function ($scope, Auth, $location) {
-    $scope.pageTitle = "Sign Up";
+    $scope.pageTitle = 'Sign Up';
     $scope.user = {};
     $scope.errors = {};
 

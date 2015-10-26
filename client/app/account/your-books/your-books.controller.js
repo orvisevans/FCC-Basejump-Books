@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('documentsApp')
-  .controller('YourBooksCtrl', function ($scope, $http, $location, socket, tile, Auth, User) {
-    $scope.pageTitle = "Your Books"
+  .controller('YourBooksCtrl', function ($scope, $http, $location, socket, tile, Auth) {
+    $scope.pageTitle = 'Your Books';
     $scope.myBooks = [];
 
     function getBooksOwnedBy(user) {
