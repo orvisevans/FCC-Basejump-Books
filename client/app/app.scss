@@ -15,8 +15,11 @@
 
 // Component styles are injected through grunt
 // injector
+@import 'account/borrowed-books/borrowed-books.scss';
 @import 'account/login/login.scss';
+@import 'account/pending-requests/pending-requests.scss';
 @import 'account/profile/profile.scss';
+@import 'account/your-books/your-books.scss';
 @import 'admin/admin.scss';
 @import 'all-books/all-books.scss';
 @import 'main/main.scss';
