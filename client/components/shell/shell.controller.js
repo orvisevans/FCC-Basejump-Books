@@ -5,15 +5,19 @@ angular.module('documentsApp')
 
 
     $scope.menu = [
-      {title: 'All Books', url: '/all-books', icon: '', count: ''},
-      {title: 'Your Books', url: '/your-books', icon: '', count: '', loginRequired: true},
-      {title: 'Pending Requests', url: '/pending-requests', icon: '', count: '', loginRequired: true},
-      {title: 'Borrowed Books', url: '/borrowed-books', icon: '', count: '', loginRequired: true}
+      {title: 'All Books', url: '/all-books', count: ''},
+      {title: 'Your Books', url: '/your-books', count: '', loginRequired: true},
+      {title: 'Pending Requests', url: '/pending-requests', count: '', loginRequired: true},
+      {title: 'Borrowed Books', url: '/borrowed-books', count: '', loginRequired: true}
     ];
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
+
+    $scope.goto = function(url) {
+      $location.path(url);
+    };
 
     $scope.logout = function() {
       Auth.logout();
