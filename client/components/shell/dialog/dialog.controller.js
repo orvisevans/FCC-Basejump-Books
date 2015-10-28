@@ -2,6 +2,8 @@
 
 angular.module('documentsApp')
   .controller('DialogController', function ($scope, $mdDialog, $http, Auth) {
+  $scope.user = Auth.getCurrentUser();
+
   $scope.closeDialog = function() {
     $mdDialog.hide();
   };
@@ -21,7 +23,7 @@ angular.module('documentsApp')
         name: $scope.name,
         author: $scope.author,
         coverUrl: $scope.coverUrl,
-        owner: Auth.getCurrentUser().id,
+        owner: $scope.user._id,
         dateAdded: new Date(),
         public: $scope.public
     };
