@@ -4,7 +4,7 @@ angular.module('documentsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('main', {
-        url: '/',
+        url: '/things',
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });
