@@ -5,6 +5,7 @@ angular.module('documentsApp')
     $scope.pageTitle = 'Community Books';
     $scope.allBooks = [];
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.bookSearch = "";
 
     Auth.isLoggedInAsync(function (loggedIn) {
       if (loggedIn) {

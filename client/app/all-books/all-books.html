@@ -1,42 +1,51 @@
 <div ng-include="'components/shell/shell.html'"></div>
-<!-- TODO: Set book's image url, name, etc. to show up -->
-<md-grid-list class="things-list" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
-        md-row-height-gt-md="1:1" md-row-height="4:3"
-        md-gutter="8px" md-gutter-gt-sm="4px">
-  <md-grid-tile ng-repeat="book in allBooks" ng-class="getColor($index)" md-rowspan="{{getSpan($index)}}"
-                  md-colspan="{{getSpan($index)}}"
-                  md-colspan-sm="1">
 
-    <md-menu ng-if="isLoggedIn()">
-      <md-button aria-label="Menu" class="md-icon-button delete-btn"  ng-click="openMenu($mdOpenMenu, $event)">
-          <md-icon style="fill:#fff" md-menu-origin md-svg-icon="assets/icons/dots-vertical.svg"></md-icon>
-      </md-button>
+<md-content>
 
-      <md-menu-content width="4">
-        <md-menu-item ng-click="requestBook(book)" ng-if="!book.requested && !isMyBook(book)">
-          <md-button>
-            Request
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-click="approveRequest(book)" ng-if="book.requested && isMyBook(book)">
-          <md-button>
-            Approve the Request
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-click="denyRequest(book)" ng-if="book.requested && isMyBook(book)">
-          <md-button>
-            Deny the Request
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-click="returnBook(book)" ng-if="book.onLoan && imBorrowing(book)">
-          <md-button>
-            Return the Book
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
+  <md-input-container>
+    <label>Search</label>
+    <input ng-model="bookSearch">
+  </md-input-container>
 
-    <img class="book-cover" ng-src="{{book.coverUrl}}">
-    <md-grid-tile-footer><h3>{{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
-  </md-grid-tile>
-</md-grid-list>
+  <md-grid-list class="things-list md-whiteframe-10dp" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="7"
+          md-row-height="2:3"
+          md-gutter="8px" md-gutter-gt-sm="4px">
+    <md-grid-tile ng-repeat="book in allBooks | filter:bookSearch" ng-class="getColor($index)" md-rowspan="{{getSpan($index)}}"
+                    md-colspan="{{getSpan($index)}}"
+                    md-colspan-sm="1">
+
+      <md-menu ng-if="isLoggedIn()">
+        <md-button aria-label="Menu" class="md-icon-button delete-btn"  ng-click="openMenu($mdOpenMenu, $event)">
+            <md-icon style="fill:#fff" md-menu-origin md-svg-icon="assets/icons/dots-vertical.svg"></md-icon>
+        </md-button>
+
+        <md-menu-content width="4">
+          <md-menu-item ng-click="requestBook(book)" ng-if="!book.requested && !isMyBook(book)">
+            <md-button>
+              Request
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-click="approveRequest(book)" ng-if="book.requested && isMyBook(book)">
+            <md-button>
+              Approve the Request
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-click="denyRequest(book)" ng-if="book.requested && isMyBook(book)">
+            <md-button>
+              Deny the Request
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-click="returnBook(book)" ng-if="book.onLoan && imBorrowing(book)">
+            <md-button>
+              Return the Book
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+
+      <img class="book-cover md-whiteframe-10dp" ng-src="{{book.coverUrl}}">
+      <md-grid-tile-footer><h3>{{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+
+</md-content>

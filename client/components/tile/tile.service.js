@@ -26,11 +26,7 @@ angular.module('documentsApp')
       },
 
       getSpan: function($index) {
-        var _d = ($index + 1) % 11;
-
-        if (_d === 1 || _d === 5) {
-          return 2;
-        }
+        return 1;
       }
     };
   });
