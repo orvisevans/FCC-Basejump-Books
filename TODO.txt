@@ -1,9 +1,9 @@
 Seed Data:
   consistant user IDs for test users?
-  at least 10 books
 
 Add-Book Dialog:
-  Search Amazon for cover URLs after putting in Title / Author
+  Search Google Books for cover URLs after putting in Title / Author
+    https://developers.google.com/books/docs/dynamic-links?hl=en
 
 Borrowing API:
   add loanLog? a separate API - when a loan is complete, write a loan-log
@@ -20,6 +20,12 @@ borrowing requests view:
   nice "You're done!" image when clear like inbox
 
 Shell:
+  /user/me not working as a route.  Is profile page created?
+
+Tiles:
+  Change from angular tiles to a bookshelf view - see books on a virtual shelf
+  see spines
+  hover over / tap to pull out/show front of book and options / info
 
 Profile Page:
   Change Password button - open dialog that contains stuff currently on settings view
@@ -34,6 +40,9 @@ User API:
   Add city, auto-add active, auto-add date-joined
   update test user and admin
   Twitter Auth
+
+Tests:
+  write so many tests!  For everything!
 
 All:
   Make it pretty
