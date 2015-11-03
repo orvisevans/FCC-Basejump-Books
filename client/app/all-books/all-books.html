@@ -7,45 +7,18 @@
     <input ng-model="bookSearch">
   </md-input-container>
 
-  <md-grid-list class="things-list md-whiteframe-10dp" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="7"
-          md-row-height="2:3"
-          md-gutter="8px" md-gutter-gt-sm="4px">
-    <md-grid-tile ng-repeat="book in allBooks | filter:bookSearch" ng-class="getColor($index)" md-rowspan="{{getSpan($index)}}"
-                    md-colspan="{{getSpan($index)}}"
-                    md-colspan-sm="1">
-
-      <md-menu ng-if="isLoggedIn()">
-        <md-button aria-label="Menu" class="md-icon-button delete-btn"  ng-click="openMenu($mdOpenMenu, $event)">
-            <md-icon style="fill:#fff" md-menu-origin md-svg-icon="assets/icons/dots-vertical.svg"></md-icon>
-        </md-button>
-
-        <md-menu-content width="4">
-          <md-menu-item ng-click="requestBook(book)" ng-if="!book.requested && !isMyBook(book)">
-            <md-button>
-              Request
-            </md-button>
-          </md-menu-item>
-          <md-menu-item ng-click="approveRequest(book)" ng-if="book.requested && isMyBook(book)">
-            <md-button>
-              Approve the Request
-            </md-button>
-          </md-menu-item>
-          <md-menu-item ng-click="denyRequest(book)" ng-if="book.requested && isMyBook(book)">
-            <md-button>
-              Deny the Request
-            </md-button>
-          </md-menu-item>
-          <md-menu-item ng-click="returnBook(book)" ng-if="book.onLoan && imBorrowing(book)">
-            <md-button>
-              Return the Book
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
-
-      <img class="book-cover md-whiteframe-10dp" ng-src="{{book.coverUrl}}">
-      <md-grid-tile-footer><h3>{{book.name}} by {{book.author}}</h3></md-grid-tile-footer>
-    </md-grid-tile>
-  </md-grid-list>
+  <div class="book" id="{{book._id}}" ng-repeat="book in allBooks | filter:bookSearch" ng-class="getColor($index)" ng-mouseenter="openBook(book)" ng-mouseleave="closeBook(book)">
+    <!-- <span class="book-title">{{book.name}}</span> -->
+    <div class="book-info hidden" id="info-{{book._id}}">
+      <div class="book-cover-wrapper">
+        <img ng-src="{{book.coverUrl}}" class="book-cover" />
+      </div>
+      <div class="book-info-wrapper">
+        <h3>{{book.name}}</h3>
+        <h4>{{book.author}}</h4>
+      </div>
+      <!-- angular material bar/fab buttons go here -->
+    </div>
+  </div>
 
 </md-content>

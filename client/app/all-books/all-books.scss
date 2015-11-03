@@ -1,0 +1,61 @@
+md-input-container {
+  margin-top: 64px;
+}
+
+
+$bookHeight: 250px;
+$bookCoverWidth: 250px;
+$bookWidth: 60px;
+$bookInfoWidth: 450px;
+$bookInfoHeight: 250px;
+$bookMargin: 1px;
+
+
+div.book {
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+  height: $bookHeight;
+  width: $bookWidth;
+  margin: $bookMargin;
+}
+
+div.book.open {
+  z-index: 10;
+}
+
+img.book-cover {
+  height: $bookHeight;
+  width: auto;
+  max-width: $bookCoverWidth;
+  background-color: black;
+}
+
+div.book-cover-wrapper {
+  height: $bookHeight;
+  width: $bookCoverWidth;
+  text-align: center;
+}
+
+div.book-info-wrapper {
+  position: absolute;
+  top: 0;
+  left: $bookCoverWidth + 8;
+}
+
+div.book-info {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  width: $bookInfoWidth;
+  margin-right: -($bookInfoWidth - $bookWidth + $bookMargin);
+  margin-bottom: -($bookInfoHeight - $bookHeight - $bookMargin);
+  height: $bookInfoHeight;
+}
+
+.hidden {
+  display: none;
+}
+
+.inline {
+  display: inline;
+}
