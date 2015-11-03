@@ -1,6 +1,8 @@
 Add-Book Dialog:
   Search Google Books for cover URLs after putting in Title / Author
     https://developers.google.com/books/docs/dynamic-links?hl=en
+  assign a tile color based on dominant image color
+  add owner's username to book for easier searching
 
 All books view:
   search features:
@@ -10,6 +12,7 @@ All books view:
   grey-out books that are currently on loan
   highlight books that you are currently borrowing
   Icon for your books
+  book colors should stay through searches - pull color from API
 
 borrowing requests view:
   larger books with check and X buttons to approve or deny request to borrow
@@ -20,7 +23,7 @@ Shell:
 
 Tiles:
   Change from angular tiles to a bookshelf view - see books on a virtual shelf
-  see spines
+  see spine images or sideways titles
   hover over / tap to pull out/show front of book and options / info
 
 Profile Page:
