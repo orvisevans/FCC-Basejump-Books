@@ -1,62 +1,36 @@
+Seed Data:
+  consistant user IDs for test users?
+
 Add-Book Dialog:
   Search Google Books for cover URLs after putting in Title / Author
     https://developers.google.com/books/docs/dynamic-links?hl=en
-  assign a tile color based on dominant image color
-  add owner's username to book for easier searching
 
-All books view:
-  search features:
-    separated into its own view or ng-include
-    check boxes for "on loan", "yours"
-    toggle to switch owner-search vs book search
-  grey-out books that are currently on loan
-  highlight books that you are currently borrowing
-  Icon for your books
-  book colors should stay through searches - pull color from API
+Borrowing API:
+  add loanLog? a separate API - when a loan is complete, write a loan-log
 
-borrowing requests view:
-  larger books with check and X buttons to approve or deny request to borrow
-  both approving and denying sends a notification to requester?
+all-books view:
+  advanced filters to find borrowed books, my books, owned by a user, etc.
+  highlight books currently borrowed
 
 Shell:
   /user/me not working as a route.  Is profile page created?
-
-Tiles:
-  Change from angular tiles to a bookshelf view - see books on a virtual shelf
-  see spine images or sideways titles
-  hover over / tap to pull out/show front of book and options / info
 
 Profile Page:
   Change Password button - open dialog that contains stuff currently on settings view
   look better - see material design profile examples online
   Make things editable when clicking an edit switch
-  Show your books underneath - full search as well
 
 Signup Page:
   Add city
   Twitter Signup
-
-Seed Data:
-  consistant user IDs for test users?
-  add another basic user
-  add some seed data with some loan requests and current loans
-
-Login Page:
-  Remove default text, warnings, etc.
-  add a "welcome back" text
 
 User API:
   Add city, auto-add active, auto-add date-joined
   update test user and admin
   Twitter Auth
 
-Borrowing API:
-  add loanLog? a separate API - when a loan is complete, write a loan-log
-  hide request button when you've requested the books
-
 Tests:
   write so many tests!  For everything!
 
 All:
   Make it pretty
-  Move books view to a separate directive or something
