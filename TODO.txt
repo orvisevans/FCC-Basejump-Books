@@ -36,11 +36,6 @@ Signup Page:
   Add city
   Twitter Signup
 
-Seed Data:
-  consistant user IDs for test users?
-  add another basic user
-  add some seed data with some loan requests and current loans
-
 Login Page:
   Remove default text, warnings, etc.
   add a "welcome back" text
