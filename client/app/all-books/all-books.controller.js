@@ -18,20 +18,6 @@ angular.module('documentsApp')
       socket.syncUpdates('book', $scope.allBooks);
     });
 
-    $scope.openBook = function (book) {
-      var DOMbook = document.getElementById(book._id);
-      var DOMbookInfo = document.getElementById('info-' + book._id);
-      $animate.addClass(DOMbook, 'open');
-      $animate.removeClass(DOMbookInfo, 'hidden')
-    }
-
-    $scope.closeBook = function (book) {
-      var DOMbook = document.getElementById(book._id);
-      var DOMbookInfo = document.getElementById('info-' + book._id);
-      $animate.removeClass(DOMbook, 'open');
-      $animate.addClass(DOMbookInfo, 'hidden');
-    }
-
     $scope.requestBook = function (book) {
       $http.put('/api/books/request/' + book._id + '/' + $scope.user._id)
         .success(function(bookRes) {
