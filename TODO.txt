@@ -1,3 +1,6 @@
+Books API:
+  figure out proper query urls to DRY out book.controller.js's findOwnedBy etc.
+
 Add-Book Dialog:
   Search Google Books for cover URLs after putting in Title / Author
     https://developers.google.com/books/docs/dynamic-links?hl=en

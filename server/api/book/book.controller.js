@@ -2,22 +2,32 @@
 
 var _ = require('lodash');
 var Book = require('./book.model');
+var User = require('../user/user.model');
 
-// Get list of books
+// Get list of public books
 exports.index = function(req, res) {
-  Book.find(function (err, books) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(books);
-  });
+  Book.find({public: true})
+      .populate('owner', 'name')
+      .populate('requester', 'name')
+      .populate('borrower', 'name')
+      .exec(function (err, books) {
+        if(err) { return handleError(res, err); }
+        return res.status(200).json(books);
+      });
 };
 
 // Get a single book
 exports.show = function(req, res) {
-  Book.findById(req.params.id, function (err, book) {
-    if(err) { return handleError(res, err); }
-    if(!book) { return res.status(404).send('Not Found'); }
-    return res.json(book);
-  });
+  console.log('finding it');
+  Book.findById(req.params.id)
+      .populate('owner', 'name')
+      .populate('requester', 'name')
+      .populate('borrower', 'name')
+      .exec(function (err, book) {
+        if(err) { return handleError(res, err); }
+        if(!book) { return res.status(404).send('Not Found'); }
+        return res.json(book);
+      });
 };
 
 // Creates a new book in the DB.
