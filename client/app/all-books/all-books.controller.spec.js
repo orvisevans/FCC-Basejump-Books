@@ -4,6 +4,7 @@ describe('Controller: AllBooksCtrl', function () {
 
   // load the controller's module
   beforeEach(module('documentsApp'));
+  beforeEach(module('socketMock'));
 
   var AllBooksCtrl, scope;
 
