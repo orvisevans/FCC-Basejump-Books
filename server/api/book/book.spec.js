@@ -88,3 +88,48 @@ describe('GET /api/books/:id', function() {
       });
   });
 });
+
+
+describe('GET /api/books/find', function() {
+  it('should return all public books with a null query', function(done) {
+    request(app)
+      .get('/api/books/find')
+      .end(function(err, res) {
+        if (err) return done(err);
+        res.body.length.should.be.exactly(8);
+        done();
+      });
+  });
+
+  it('should return the right number of books with an author query', function(done) {
+    var successes = 0;
+
+    request(app)
+      .get('/api/books/find?author=Patrick Rothfuss')
+      .end(function(err, res) {
+        if (err) return done(err);
+        res.body.length.should.be.exactly(2);
+        successes += 1;
+        if (successes === 3) done();
+      });
+
+    request(app)
+      .get('/api/books/find?author=Malcolm Gladwell')
+      .end(function(err, res) {
+        if (err) return done(err);
+        res.body.length.should.be.exactly(1);
+        successes += 1;
+        if (successes === 3) done();
+      });
+
+    request(app)
+      .get('/api/books/find?author=J K Rowling')
+      .end(function(err, res) {
+        if (err) return done(err);
+        res.body.length.should.be.exactly(0);
+        successes += 1;
+        if (successes === 3) done();
+      });
+
+  });
+});

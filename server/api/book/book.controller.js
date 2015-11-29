@@ -18,7 +18,6 @@ exports.index = function(req, res) {
 
 // Get a single book
 exports.show = function(req, res) {
-  console.log('finding it');
   Book.findById(req.params.id)
       .populate('owner', 'name')
       .populate('requester', 'name')
@@ -64,49 +63,18 @@ exports.destroy = function(req, res) {
   });
 };
 
-//Finds books owned by a user in the DB.
-exports.findOwnedBy = function(req, res) {
-  Book.find({owner: req.params.ownerId}, function(err, books) {
-    if(err) { return handleError(res, err); }
-    if(!books) { return res.status(404).send('Not Found'); }
-    return res.json(books);
-  });
-};
-
-//Finds books borrowed by a user in the DB.
-exports.findBorrowedBy = function(req, res) {
-  Book.find({onLoan: true, borrower: req.params.borrowerId}, function(err, books) {
-    if(err) { return handleError(res, err); }
-    if(!books) { return res.status(404).send('Not Found'); }
-    return res.json(books);
-  });
-};
-
-//Finds books borrowed from a user in the DB.
-exports.findBorrowedFrom = function(req, res) {
-  Book.find({onLoan: true, owner: req.params.borrowerId}, function(err, books) {
-    if(err) { return handleError(res, err); }
-    if(!books) { return res.status(404).send('Not Found'); }
-    return res.json(books);
-  });
-};
-
-//Finds books requested by a user in the DB.
-exports.findRequestedBy = function(req, res) {
-  Book.find({requested: true, requester: req.params.requesterId}, function(err, books) {
-    if(err) { return handleError(res, err); }
-    if(!books) { return res.status(404).send('Not Found'); }
-    return res.json(books);
-  });
-};
-
-//Finds books requested from a user in the DB.
-exports.findRequestedFrom = function(req, res) {
-  Book.find({requested: true, owner: req.params.ownerId}, function(err, books) {
-    if(err) { return handleError(res, err); }
-    if(!books) { return res.status(404).send('Not Found'); }
-    return res.json(books);
-  });
+//Finds books with search parameters
+exports.find = function(req, res) {
+  var publicQuery = req.query;
+  publicQuery.public = true;
+  Book.find(publicQuery)
+      .populate('owner', 'name')
+      .populate('requester', 'name')
+      .populate('borrower', 'name')
+      .exec(function (err, books) {
+        if(err) { return handleError(res, err); }
+        return res.status(200).json(books);
+      });
 };
 
 exports.requestBook = function(req, res) {
