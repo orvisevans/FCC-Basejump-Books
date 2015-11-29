@@ -6,19 +6,24 @@
     <label>Search</label>
     <input ng-model="bookSearch">
   </md-input-container>
-
   <md-list>
     <md-list-item class="md-2-line" ng-repeat="book in allBooks | filter:bookSearch | orderBy:'-dateAdded'">
       <img ng-src="{{book.coverUrl}}" class="book-cover" alt="{{book.name}}" />
       <div class="md-list-item-text" layout="column">
         <h3>{{ book.name }}</h3>
         <h4>{{ book.author }}</h4>
+        <span ng-if="book.requested">requested</span>
+        <span ng-if="book.onLoan">onLoan</span>
+        <span ng-if="book.owner._id === user._id">mine</span>
       </div>
-      <md-button class="md-raised md-primary" ng-click="requestBook(book)">Request</md-button>
-      <md-button class="md-raised" ng-click="returnBook(book)">Return</md-button>
-      <md-button class="md-raised" ng-click="approveRequest(book)">Approve Request</md-button>
-      <md-button class="md-raised" ng-click="denyRequest(book)">Deny Request</md-button>
-      <md-button class="md-raised md-warn" ng-click="deleteBook(book)">Remove From Your Library</md-button>
+      <div ng-if="isLoggedIn()">
+        <md-button class="md-raised md-primary" ng-if="canRequest(book)" ng-click="request(book)">Request</md-button>
+        <md-button class="md-raised md-primary" ng-if="canCancelRequest(book)" ng-click="cancelRequest(book)">Cancel Request</md-button>
+        <md-button class="md-raised md-primary" ng-if="canReturn(book)" ng-click="return(book)">Return</md-button>
+        <md-button class="md-raised" ng-if="canApproveOrDeny(book)" ng-click="approveRequest(book)">Approve Request</md-button>
+        <md-button class="md-raised" ng-if="canApproveOrDeny(book)" ng-click="denyRequest(book)">Deny Request</md-button>
+        <md-button class="md-raised md-warn" ng-if="canDelete(book)" ng-click="delete(book)">Remove</md-button>
+      </div>
       <md-divider ng-if="!$last"></md-divider>
     </md-list-item>
   </md-list>

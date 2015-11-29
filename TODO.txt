@@ -48,6 +48,7 @@ User API:
 Borrowing API:
   add loanLog? a separate API - when a loan is complete, write a loan-log
   hide request button when you've requested the books
+  able to request a book when someone else is borrowing it and be approved as next borrower
 
 Tests:
   write so many tests!  For everything!

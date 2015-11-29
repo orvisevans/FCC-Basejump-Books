@@ -18,7 +18,27 @@ angular.module('documentsApp')
       socket.syncUpdates('book', $scope.allBooks);
     });
 
-    $scope.requestBook = function (book) {
+    $scope.canRequest = function (book) {
+      return !(book.requested || book.onLoan) || book.owner._id !== $scope.user._id;
+    };
+
+    $scope.canCancelRequest = function (book) {
+      return book.requested && book.requester._id === $scope.user._id;
+    };
+
+    $scope.canApproveOrDeny = function (book) {
+      return book.requested && book.owner._id === $scope.user._id;
+    };
+
+    $scope.canReturn = function (book) {
+      return book.isBorrowed && book.borrower._id === $scope.user._id;
+    };
+
+    $scope.canDelete = function (book) {
+      return !book.isBorrowed && book.owner._id === $scope.user._id;
+    };
+
+    $scope.request = function (book) {
       $http.put('/api/books/request/' + book._id + '/' + $scope.user._id)
         .success(function(bookRes) {
           book = bookRes;
@@ -39,8 +59,15 @@ angular.module('documentsApp')
         });
     };
 
-    $scope.returnBook = function (book) {
+    $scope.return = function (book) {
       $http.put('/api/books/returnBook/' + book._id)
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
+    $scope.delete = function (book) {
+      $http.delete('/api/books/' + book._id)
         .success(function(bookRes) {
           book = bookRes;
         });
