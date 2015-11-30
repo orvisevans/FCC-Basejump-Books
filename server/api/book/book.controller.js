@@ -40,15 +40,20 @@ exports.create = function(req, res) {
 // Updates an existing book in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Book.findById(req.params.id, function (err, book) {
-    if (err) { return handleError(res, err); }
-    if(!book) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(book, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(book);
-    });
-  });
+  Book.findById(req.params.id)
+      .exec(function (err, book) {
+        if (err) { return handleError(res, err); }
+        if(!book) { return res.status(404).send('Not Found'); }
+        var updated = _.merge(book, req.body);
+        book.populate('owner', 'name')
+            .populate('requester', 'name')
+            .populate('borrower', 'name', function(err, book) {
+              updated.save(function (err) {
+                if (err) { return handleError(res, err); }
+                return res.status(200).json(book);
+              });
+            });
+      });
 };
 
 // Deletes a book from the DB.
@@ -77,61 +82,50 @@ exports.find = function(req, res) {
       });
 };
 
-exports.requestBook = function(req, res) {
-  var conditions = {book: req.params.bookId};
-  var update = {requested: true,
-                requester: req.params.requesterId,
-                requestedDate: new Date()};
-
-  Book.findAndUpdate(conditions, update, function (err, book) {
-      if(err) { return handleError(res, err); }
-      return res.status(200).json(book);
-  });
+exports.request = function(req, res) {
+  req.body = {requested: true,
+              requester: req.body.requester,
+              requestedDate: new Date()};
+  exports.update(req, res);
 };
+
+exports.cancelRequest = function(req, res) {
+  req.body = {requested: false,
+              requester: undefined,
+              requestedDate: undefined};
+  exports.update(req, res);
+}
 
 exports.approveRequest = function(req, res) {
   var dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + 30);
 
-  var conditions = {book: req.params.bookId};
-  var update = {requested: false,
-                requester: undefined,
-                requestedDate: undefined,
-                onLoan: true,
-                borrower: req.params.borrowerId,
-                borrowedDate: new Date(),
-                dueDate: dueDate};
+  req.body = {requested: false,
+              requester: undefined,
+              requestedDate: undefined,
+              onLoan: true,
+              borrower: req.body.requester,
+              borrowedDate: new Date(),
+              dueDate: dueDate};
 
-  Book.findAndUpdate(conditions, update, function (err, book) {
-      if(err) { return handleError(res, err); }
-      return res.status(200).json(book);
-  });
+  exports.update(req, res);
 };
 
 exports.denyRequest = function(req, res) {
-  var conditions = {book: req.params.bookId};
-  var update = {requested: false,
-                requester: undefined,
-                requestedDate: undefined};
+  req.body = {requested: false,
+              requester: undefined,
+              requestedDate: undefined};
 
-  Book.findAndUpdate(conditions, update, function (err, book) {
-      if(err) { return handleError(res, err); }
-      return res.status(200).json(book);
-  });
+  exports.update(req, res);
 };
 
-exports.returnBook = function(req, res) {
-  var conditions = {book: req.params.bookId};
-  var update = {onLoan: false,
-                borrower: undefined,
-                borrowedDate: undefined,
-                dueDate: undefined,
-                };
+exports.return = function(req, res) {
+  req.body = {onLoan: false,
+              borrower: undefined,
+              borrowedDate: undefined,
+              dueDate: undefined};
 
-  Book.findAndUpdate(conditions, update, function (err, book) {
-      if(err) { return handleError(res, err); }
-      return res.status(200).json(book);
-  });
+  exports.update(req, res);
 };
 
 function handleError(res, err) {

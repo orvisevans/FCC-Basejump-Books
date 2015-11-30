@@ -5,7 +5,7 @@ angular.module('documentsApp')
     $scope.pageTitle = 'Community Books';
     $scope.allBooks = [];
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.bookSearch = "";
+    $scope.bookSearch = '';
 
     Auth.isLoggedInAsync(function (loggedIn) {
       if (loggedIn) {
@@ -39,28 +39,35 @@ angular.module('documentsApp')
     };
 
     $scope.request = function (book) {
-      $http.put('/api/books/request/' + book._id + '/' + $scope.user._id)
+      $http.put('/api/books/request/' + book._id, { requester: $scope.user._id })
+        .success(function(bookRes) {
+          book = bookRes;
+        });
+    };
+
+    $scope.cancelRequest = function (book) {
+      $http.put('/api/books/cancel-request/' + book._id)
         .success(function(bookRes) {
           book = bookRes;
         });
     };
 
     $scope.approveRequest = function (book) {
-      $http.put('/api/books/approveRequest/' + book._id + '/' + book.requester)
+      $http.put('/api/books/approve-request/' + book._id, { requester: book.requester})
         .success(function(bookRes) {
           book = bookRes;
         });
     };
 
     $scope.denyRequest = function (book) {
-      $http.put('/api/books/denyRequest/' + book._id + '/' + book.requester)
+      $http.put('/api/books/deny-request/' + book._id, { requester: book.requester})
         .success(function(bookRes) {
           book = bookRes;
         });
     };
 
     $scope.return = function (book) {
-      $http.put('/api/books/returnBook/' + book._id)
+      $http.put('/api/books/return/' + book._id)
         .success(function(bookRes) {
           book = bookRes;
         });

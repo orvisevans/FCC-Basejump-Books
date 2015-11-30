@@ -12,9 +12,10 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
-router.put('/request/:bookId/:requesterId', controller.requestBook);
-router.put('/approveRequest/:bookId/:borrowerId', controller.approveRequest);
-router.put('/denyRequest/:bookId/:borrowerId', controller.denyRequest);
-router.put('/returnBook/:bookId', controller.returnBook);
+router.put('/request/:id', controller.request);
+router.put('/cancel-request/:id', controller.cancelRequest);
+router.put('/approve-request/:id', controller.approveRequest);
+router.put('/deny-request/:id', controller.denyRequest);
+router.put('/return/:id', controller.return);
 
 module.exports = router;
