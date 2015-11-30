@@ -18,24 +18,28 @@ angular.module('documentsApp')
       socket.syncUpdates('book', $scope.allBooks);
     });
 
+    function iAm(user) {
+      return user._id === $scope.user._id;
+    }
+
     $scope.canRequest = function (book) {
-      return !(book.requested || book.onLoan) || book.owner._id !== $scope.user._id;
+      return !book.requested && !book.onLoan && !iAm(book.owner);
     };
 
     $scope.canCancelRequest = function (book) {
-      return book.requested && book.requester._id === $scope.user._id;
+      return book.requested && iAm(book.requester);
     };
 
     $scope.canApproveOrDeny = function (book) {
-      return book.requested && book.owner._id === $scope.user._id;
+      return iAm(book.owner) && book.requested;
     };
 
     $scope.canReturn = function (book) {
-      return book.isBorrowed && book.borrower._id === $scope.user._id;
+      return book.onLoan && iAm(book.borrower);
     };
 
     $scope.canDelete = function (book) {
-      return !book.isBorrowed && book.owner._id === $scope.user._id;
+      return iAm(book.owner) && !book.onLoan;
     };
 
     $scope.request = function (book) {
